@@ -34,8 +34,8 @@ public struct TyreResponse: TyreResponseProtocol {
     ///   - request: The url request sent to server.
     ///   - response: The HTTP url response returned from server.
     public init(data: Data,
-         request: URLRequest,
-         response: HTTPURLResponse) {
+                request: URLRequest,
+                response: HTTPURLResponse) {
         
         self.data = data
         self.request = request

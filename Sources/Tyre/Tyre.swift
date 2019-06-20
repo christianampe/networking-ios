@@ -21,7 +21,7 @@ public class Tyre: TyreProtocol {
 public extension Tyre {
     @discardableResult
     func task(_ request: URLRequest,
-                     completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
+              completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
         
         // make network request utilizing Apple's API
         let task = session.dataTask(with: request) { data, response, error in
