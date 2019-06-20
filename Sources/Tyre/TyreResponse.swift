@@ -16,7 +16,7 @@ public protocol TyreResponseProtocol {
     var response: HTTPURLResponse { get }
 }
 
-public struct TyreResponse : TyreResponseProtocol {
+public struct TyreResponse: TyreResponseProtocol {
     
     /// Data returned from the network request.
     public let data: Data

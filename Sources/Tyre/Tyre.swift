@@ -12,7 +12,7 @@ public protocol TyreProtocol {
     @discardableResult func task(_ request: URLRequest, completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask
 }
 
-public class Tyre : TyreProtocol {
+public class Tyre: TyreProtocol {
     
     /// A network  session used to make all network requests.
     private let session = URLSession(configuration: .default)
