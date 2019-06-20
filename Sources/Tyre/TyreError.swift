@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum TyreError: Error {
+public enum TyreError : Error {
     
     /// Returned when no response is returned from the server.
     case unresponsive

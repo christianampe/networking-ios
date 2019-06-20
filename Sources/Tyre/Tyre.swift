@@ -4,24 +4,24 @@
 
 import Foundation
 
-protocol TyreProtocol {
+public protocol TyreProtocol {
     
     /// The core method wrapping a `URLSession` `dataTask`.
-    /// - Parameter request: A request object containing all information necessary for making the network request.
+    /// - Parameter task: A request object containing all information necessary for making the network request.
     /// - Parameter completion: A  generic result containing either an error or successful response.
-    @discardableResult func request(_ request: URLRequest, completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask
+    @discardableResult func task(_ request: URLRequest, completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask
 }
 
-public class Tyre {
+public class Tyre : TyreProtocol {
     
     /// A network  session used to make all network requests.
     private let session = URLSession(configuration: .default)
 }
 
-extension Tyre: TyreProtocol {
+public extension Tyre {
     @discardableResult
-    public func request(_ request: URLRequest,
-                        completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
+    func task(_ request: URLRequest,
+                     completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
         
         // make network request utilizing Apple's API
         let task = session.dataTask(with: request) { data, response, error in
@@ -31,6 +31,7 @@ extension Tyre: TyreProtocol {
                 
                 // server did not responsd to request
                 completion(.failure(.unresponsive))
+                
                 return
             }
             
