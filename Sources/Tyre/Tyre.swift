@@ -6,6 +6,14 @@ import Foundation
 
 public protocol Tyre {
     
+    /// The associated error passed back when performing a failed task.
+    associatedtype Error: Swift.Error
+    
+    /// The associated response returned when performing a successful task.
+    associatedtype Response: TyreResponseProtocol
+    
+    /// The default initializer.
+    /// - Parameter session: The `URLSession` used to make network requests.
     init(_ session: URLSession)
     
     /// A network  session used to make all network requests.
@@ -14,17 +22,18 @@ public protocol Tyre {
     /// The core method wrapping a `URLSession` `dataTask`.
     /// - Parameter task: A request object containing all information necessary for making the network request.
     /// - Parameter completion: A  generic result containing either an error or successful response.
-    @discardableResult func task(_ request: URLRequest, completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask
+    @discardableResult func task(_ request: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) -> URLSessionDataTask
 }
 
-extension Tyre {
+// MARK: - Default Implementation
+public extension Tyre {
     
     /// The core method wrapping a `URLSession` `dataTask`.
     /// - Parameter task: A request object containing all information necessary for making the network request.
     /// - Parameter completion: A  generic result containing either an error or successful response.
     @discardableResult
-    public func task(_ request: URLRequest,
-                     completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
+    func task(_ request: URLRequest,
+              completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
         
         // make network request utilizing Apple's API
         let task = session.dataTask(with: request) { data, response, error in
