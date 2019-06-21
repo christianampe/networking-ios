@@ -4,7 +4,12 @@
 
 import Foundation
 
-public protocol TyreProtocol {
+public protocol Tyre {
+    
+    init(_ session: URLSession)
+    
+    /// A network  session used to make all network requests.
+    var session: URLSession { get }
     
     /// The core method wrapping a `URLSession` `dataTask`.
     /// - Parameter task: A request object containing all information necessary for making the network request.
@@ -12,17 +17,11 @@ public protocol TyreProtocol {
     @discardableResult func task(_ request: URLRequest, completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask
 }
 
-public class Tyre {
+extension Tyre {
     
-    /// A network  session used to make all network requests.
-    private let session: URLSession
-    
-    public init(_ session: URLSession = .init()) {
-        self.session = session
-    }
-}
-
-extension Tyre: TyreProtocol {
+    /// The core method wrapping a `URLSession` `dataTask`.
+    /// - Parameter task: A request object containing all information necessary for making the network request.
+    /// - Parameter completion: A  generic result containing either an error or successful response.
     @discardableResult
     public func task(_ request: URLRequest,
                      completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
