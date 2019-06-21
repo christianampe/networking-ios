@@ -15,7 +15,11 @@ public protocol TyreProtocol {
 public class Tyre: TyreProtocol {
     
     /// A network  session used to make all network requests.
-    private let session = URLSession(configuration: .default)
+    private let session: URLSession
+    
+    public init(_ session: URLSession = .init()) {
+        self.session = session
+    }
 }
 
 public extension Tyre {
