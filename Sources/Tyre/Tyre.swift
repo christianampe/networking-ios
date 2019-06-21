@@ -12,7 +12,7 @@ public protocol TyreProtocol {
     @discardableResult func task(_ request: URLRequest, completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask
 }
 
-public class Tyre: TyreProtocol {
+public class Tyre {
     
     /// A network  session used to make all network requests.
     private let session: URLSession
@@ -22,10 +22,10 @@ public class Tyre: TyreProtocol {
     }
 }
 
-public extension Tyre {
+extension Tyre: TyreProtocol {
     @discardableResult
-    func task(_ request: URLRequest,
-              completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
+    public func task(_ request: URLRequest,
+                     completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
         
         // make network request utilizing Apple's API
         let task = session.dataTask(with: request) { data, response, error in
