@@ -6,11 +6,11 @@ import Foundation
 
 public protocol Tyre {
     
-    /// The associated error passed back when performing a failed task.
-    associatedtype Error: Swift.Error
-    
     /// The associated response returned when performing a successful task.
     associatedtype Response: TyreResponseProtocol
+    
+    /// The associated error passed back when performing a failed task.
+    associatedtype Error: Swift.Error
     
     /// The default initializer.
     /// - Parameter session: The `URLSession` used to make network requests.
