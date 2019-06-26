@@ -4,7 +4,8 @@
 
 import Foundation
 
-public protocol Tyre {
+// MARK: - Interface
+private protocol TyreInterface {
     
     /// The associated response returned when performing a successful task.
     associatedtype Response: TyreResponseProtocol
@@ -12,14 +13,8 @@ public protocol Tyre {
     /// The associated error passed back when performing a failed task.
     associatedtype Error: Swift.Error
     
-    /// The default initializer.
-    /// - Parameter session: The `URLSession` used to make network requests.
-    init(_ session: URLSession)
-    
-    /// A network  session used to make all network requests.
-    var session: URLSession { get }
-    
     /// The core method wrapping a `URLSession` `dataTask`.
+    ///
     /// - Parameter task: A request object containing all information necessary for making the network request.
     /// - Parameter completion: A  generic result containing either an error or successful response.
     @discardableResult
@@ -27,15 +22,29 @@ public protocol Tyre {
               completion: @escaping (Result<Response, Error>) -> Void) -> URLSessionDataTask
 }
 
-// MARK: - Default Implementation
-public extension Tyre {
+// MARK: - Class Declaration
+public class Tyre<Error: Swift.Error> {
+    
+    /// A network  session used to make all network requests.
+    private let session: URLSession
+    
+    /// The default initializer.
+    /// - Parameter session: The `URLSession` used to make network requests.
+    public init(_ session: URLSession) {
+        self.session = session
+    }
+}
+
+// MARK: - TyreInterface Conformation
+extension Tyre: TyreInterface {
     
     /// The core method wrapping a `URLSession` `dataTask`.
+    ///
     /// - Parameter task: A request object containing all information necessary for making the network request.
     /// - Parameter completion: A  generic result containing either an error or successful response.
     @discardableResult
-    func task(_ request: URLRequest,
-              completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
+    public func task(_ request: URLRequest,
+                     completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
         
         // make network request utilizing Apple's API
         let task = session.dataTask(with: request) { data, response, error in
