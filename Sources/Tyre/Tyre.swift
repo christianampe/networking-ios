@@ -30,7 +30,7 @@ public class Tyre<Error: Swift.Error> {
     
     /// The default initializer.
     /// - Parameter session: The `URLSession` used to make network requests.
-    public init(_ session: URLSession) {
+    public init(_ session: URLSession = .init()) {
         self.session = session
     }
 }

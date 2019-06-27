@@ -28,6 +28,7 @@ public struct TyreResponse: TyreResponseProtocol {
     public let response: HTTPURLResponse
     
     /// Explicit initializer.
+    ///
     /// - Parameter data: The data returned from the network request.
     /// - Parameter request: The url request sent to server.
     /// - Parameter response: The HTTP url response returned from server.
