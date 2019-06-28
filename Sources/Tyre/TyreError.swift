@@ -2,8 +2,6 @@
 //  Created by Christian Ampe on 5/28/19.
 //
 
-import Foundation
-
 public enum TyreError: Error {
     
     /// Returned when no response is returned from the server.

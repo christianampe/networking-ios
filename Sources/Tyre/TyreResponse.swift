@@ -17,14 +17,8 @@ public protocol TyreResponseProtocol {
 }
 
 public struct TyreResponse: TyreResponseProtocol {
-    
-    /// Data returned from the network request.
     public let data: Data
-    
-    /// URL request sent to server.
     public let request: URLRequest
-    
-    /// HTTP url response returned from server.
     public let response: HTTPURLResponse
     
     /// Explicit initializer.

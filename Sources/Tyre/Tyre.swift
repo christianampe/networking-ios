@@ -23,7 +23,7 @@ private protocol TyreInterface {
 }
 
 // MARK: - Class Declaration
-public class Tyre<Error: Swift.Error> {
+public class Tyre {
     
     /// A network  session used to make all network requests.
     private let session: URLSession
@@ -37,11 +37,6 @@ public class Tyre<Error: Swift.Error> {
 
 // MARK: - TyreInterface Conformation
 extension Tyre: TyreInterface {
-    
-    /// The core method wrapping a `URLSession` `dataTask`.
-    ///
-    /// - Parameter task: A request object containing all information necessary for making the network request.
-    /// - Parameter completion: A  generic result containing either an error or successful response.
     @discardableResult
     public func task(_ request: URLRequest,
                      completion: @escaping (Result<TyreResponse, TyreError>) -> Void) -> URLSessionDataTask {
