@@ -13,7 +13,7 @@ private protocol TyreInterface {
     /// The associated error passed back when performing a failed task.
     associatedtype Error: Swift.Error
     
-    /// The core method wrapping a `URLSession` `dataTask`.
+    /// The core method used to make a network request.
     ///
     /// - Parameter task: A request object containing all information necessary for making the network request.
     /// - Parameter completion: A  generic result containing either an error or successful response.
@@ -23,7 +23,7 @@ private protocol TyreInterface {
 }
 
 // MARK: - Class Declaration
-public class Tyre {
+public struct Tyre {
     
     /// A network  session used to make all network requests.
     private let session: URLSession
